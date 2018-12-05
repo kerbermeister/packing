@@ -80,8 +80,19 @@ public class Main {
                 insertValueFromCell(doneRow, row, 5, 3);
                 insertValueFromCell(doneRow, row, 6, 10);
 
-                if (row.getCell(4) != null)
-                    doneRow.getCell(7).setCellValue(ColorResolver.resolveColor(row.getCell(4).getStringCellValue()));
+                if (row.getCell(4) != null) {
+                    String color;
+                    if ((color = ColorResolver.resolveColor(row.getCell(4).getStringCellValue())) == null) {
+                        color = row.getCell(4).getStringCellValue();
+                        doneRow.getCell(7).setCellValue(color);
+                        System.out.println("Color has not been resolved for " + row.getCell(6).getStringCellValue() + " file name: " + file.getName());
+                    } else {
+                        doneRow.getCell(7).setCellValue(color);
+                    }
+//
+//                    doneRow.getCell(7).setCellValue(ColorResolver.resolveColor(row.getCell(4).getStringCellValue()));
+                }
+
 
                 insertValueFromCell(doneRow, row, 8, 7);
 
