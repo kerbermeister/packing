@@ -89,8 +89,6 @@ public class Main {
                     } else {
                         doneRow.getCell(7).setCellValue(color);
                     }
-//
-//                    doneRow.getCell(7).setCellValue(ColorResolver.resolveColor(row.getCell(4).getStringCellValue()));
                 }
 
 
