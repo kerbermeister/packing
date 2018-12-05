@@ -24,31 +24,52 @@ public class Main {
         for (File file : files) {
             FileInputStream fileInputStream = new FileInputStream(file);
             Workbook workbook = new HSSFWorkbook(fileInputStream);
-            Iterator<Row> excelList = ExcelReader.getExcelList(workbook);
+            Iterator<Row> rows = ExcelReader.getExcelList(workbook);
             doneWorkbook = new HSSFWorkbook();
             Sheet doneSheet = doneWorkbook.createSheet();
 
             int rowNum = 0;
-            while (excelList.hasNext()) {
+            Row firstDoneRow = doneSheet.createRow(0);
+            firstDoneRow.createCell(0).setCellValue("Model");
+            firstDoneRow.createCell(1).setCellValue("Quantity");
+            firstDoneRow.createCell(2).setCellValue("Container");
+            firstDoneRow.createCell(3).setCellValue("Date");
+            firstDoneRow.createCell(4).setCellValue("Serial number");
+            firstDoneRow.createCell(5).setCellValue("Bar Code");
+            firstDoneRow.createCell(6).setCellValue("Version");
+            firstDoneRow.createCell(7).setCellValue("Color");
+            firstDoneRow.createCell(8).setCellValue("Order");
+
+            while (rows.hasNext()) {
                 if (rowNum == 0){
-                    excelList.next();
+                    rows.next();
                     rowNum++;
                     continue;
                 }
 
-                Row row = excelList.next();
+                Row row = rows.next();
                 Iterator<Cell> cellIterator = row.cellIterator();
                 Row doneRow = doneSheet.createRow(rowNum);
 
-                int cellNum = 0;
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
                     cell.setCellType(CellType.STRING);
-                    Cell doneCell = doneRow.createCell(cellNum);
-                    doneCell.setCellType(CellType.STRING);
-                    doneCell.setCellValue(cell.getStringCellValue());
-                    cellNum++;
                 }
+
+                for (int i = 0; i < 9; i++) {
+                    doneRow.createCell(i).setCellType(CellType.STRING);
+                }
+
+                doneRow.getCell(0).setCellValue(row.getCell(6).getStringCellValue());
+                doneRow.getCell(1).setCellValue(row.getCell(0).getStringCellValue());
+                doneRow.getCell(2).setCellValue(row.getCell(5).getStringCellValue());
+                doneRow.getCell(3).setCellValue(row.getCell(1).getStringCellValue());
+                doneRow.getCell(4).setCellValue(row.getCell(2).getStringCellValue());
+                doneRow.getCell(5).setCellValue(row.getCell(3).getStringCellValue());
+                doneRow.getCell(6).setCellValue(row.getCell(10).getStringCellValue());
+                doneRow.getCell(7).setCellValue(row.getCell(4).getStringCellValue());
+                doneRow.getCell(8).setCellValue(row.getCell(7).getStringCellValue());
+
                 rowNum++;
             }
 
