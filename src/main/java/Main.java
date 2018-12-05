@@ -10,6 +10,26 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class Main {
+    public static void createHeaderRow(Row row) {
+        row.createCell(0).setCellValue("Model");
+        row.createCell(1).setCellValue("Quantity");
+        row.createCell(2).setCellValue("Container");
+        row.createCell(3).setCellValue("Date");
+        row.createCell(4).setCellValue("Serial number");
+        row.createCell(5).setCellValue("Bar Code");
+        row.createCell(6).setCellValue("Version");
+        row.createCell(7).setCellValue("Color");
+        row.createCell(8).setCellValue("Order");
+    }
+
+    public static void insertValueFromCell(Row doneRow, Row row, int to, int from) {
+        if (row.getCell(from) == null) {
+            doneRow.createCell(to).setCellType(CellType.STRING);
+        } else {
+            doneRow.createCell(to).setCellValue(row.getCell(from).getStringCellValue());
+        }
+    }
+
     public static void main(String[] args) throws InvalidFormatException, IOException {
         String path;
         Scanner scanner = new Scanner(System.in);
@@ -29,16 +49,8 @@ public class Main {
             Sheet doneSheet = doneWorkbook.createSheet();
 
             int rowNum = 0;
-            Row firstDoneRow = doneSheet.createRow(0);
-            firstDoneRow.createCell(0).setCellValue("Model");
-            firstDoneRow.createCell(1).setCellValue("Quantity");
-            firstDoneRow.createCell(2).setCellValue("Container");
-            firstDoneRow.createCell(3).setCellValue("Date");
-            firstDoneRow.createCell(4).setCellValue("Serial number");
-            firstDoneRow.createCell(5).setCellValue("Bar Code");
-            firstDoneRow.createCell(6).setCellValue("Version");
-            firstDoneRow.createCell(7).setCellValue("Color");
-            firstDoneRow.createCell(8).setCellValue("Order");
+            Row headerRow = doneSheet.createRow(0);
+            createHeaderRow(headerRow);
 
             while (rows.hasNext()) {
                 if (rowNum == 0){
@@ -60,20 +72,23 @@ public class Main {
                     doneRow.createCell(i).setCellType(CellType.STRING);
                 }
 
-                doneRow.getCell(0).setCellValue(row.getCell(6).getStringCellValue());
-                doneRow.getCell(1).setCellValue(row.getCell(0).getStringCellValue());
-                doneRow.getCell(2).setCellValue(row.getCell(5).getStringCellValue());
-                doneRow.getCell(3).setCellValue(row.getCell(1).getStringCellValue());
-                doneRow.getCell(4).setCellValue(row.getCell(2).getStringCellValue());
-                doneRow.getCell(5).setCellValue(row.getCell(3).getStringCellValue());
-                doneRow.getCell(6).setCellValue(row.getCell(10).getStringCellValue());
-                doneRow.getCell(7).setCellValue(row.getCell(4).getStringCellValue());
-                doneRow.getCell(8).setCellValue(row.getCell(7).getStringCellValue());
+                insertValueFromCell(doneRow, row, 0, 6);
+                insertValueFromCell(doneRow, row, 1, 0);
+                insertValueFromCell(doneRow, row, 2, 5);
+                insertValueFromCell(doneRow, row, 3, 1);
+                insertValueFromCell(doneRow, row, 4, 2);
+                insertValueFromCell(doneRow, row, 5, 3);
+                insertValueFromCell(doneRow, row, 6, 10);
+
+                if (row.getCell(4) != null)
+                    doneRow.getCell(7).setCellValue(ColorResolver.resolveColor(row.getCell(4).getStringCellValue()));
+
+                insertValueFromCell(doneRow, row, 8, 7);
 
                 rowNum++;
             }
 
-            File outputFile = new File("C:\\Users\\tarasov.a\\Desktop\\files\\1.xls");
+            File outputFile = new File("C:\\Users\\tarasov.a\\Desktop\\files\\" + file.getName().substring(0, file.getName().indexOf(".")) + ".xls");
             FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
             doneWorkbook.write(fileOutputStream);
             fileOutputStream.close();
