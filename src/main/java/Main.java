@@ -2,14 +2,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void createHeaderRow(Row row) {
@@ -35,7 +29,7 @@ public class Main {
     public static void main(String[] args) throws InvalidFormatException, IOException {
         String path;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("enter file path: ");
+        System.out.println("введите путь с файлами для обработки: ");
         path = scanner.nextLine();
         Workbook doneWorkbook;
 
@@ -90,7 +84,10 @@ public class Main {
                         color = row.getCell(4).getStringCellValue();
                         doneRow.getCell(7).setCellValue(color);
 
-                        notResolvedColors.put(row.getCell(6).getStringCellValue() + " " + file.getName(), row.getCell(4).getStringCellValue());
+                        notResolvedColors.put(row.getCell(4).getStringCellValue() + " " +
+                                row.getCell(6).getStringCellValue() +
+                                " " +
+                                file.getName(), row.getCell(4).getStringCellValue());
                     } else {
                         doneRow.getCell(7).setCellValue(color);
                     }
@@ -109,10 +106,45 @@ public class Main {
             fileInputStream.close();
         }
 
-        System.out.println("color not resolved:");
-        for (Map.Entry entry : notResolvedColors.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue());
+        System.out.println("цвета неопределены:");
+        for (String key : notResolvedColors.keySet()) {
+            System.out.println(key);
         }
+
+        if (!notResolvedColors.isEmpty()) {
+            addNotResolvedColors(notResolvedColors);
+        }
+
+    }
+
+    public static void addNotResolvedColors(Map<String, String> notResolvedColors) throws IOException{
+        Map<String, Integer> uniqueColors = new HashMap<String, Integer>();
+
+        int count = 0;
+        for (String color : notResolvedColors.values()) {
+            uniqueColors.put(color, count++);
+        }
+
+        File patterns = new File("C:\\Users\\tarasov.a\\Desktop\\parser\\patterns.xls");
+        FileInputStream fio = new FileInputStream(patterns);
+        Workbook patternWorkbook = new HSSFWorkbook(fio);
+        Sheet sheet = patternWorkbook.getSheetAt(0);
+        int lastRowNum = sheet.getLastRowNum();
+
+        for (String color : uniqueColors.keySet()) {
+            Row row = sheet.createRow(lastRowNum + 1);
+            Cell cell = row.createCell(0);
+            cell.setCellType(CellType.STRING);
+            cell.setCellValue(color);
+            lastRowNum++;
+        }
+
+        fio.close();
+        FileOutputStream fileOutputStream = new FileOutputStream(patterns);
+        ((HSSFWorkbook) patternWorkbook).write(fileOutputStream);
+        patternWorkbook.close();
+        fileOutputStream.close();
+        System.out.println("недостающие цвета добавлены в patterns.xls, переведите их");
     }
 
 

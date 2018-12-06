@@ -4,6 +4,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -26,7 +27,7 @@ public class ColorResolver {
         fileInputStream.close();
     }
 
-    static Map<String, String> colors = new TreeMap<String, String>();
+    static Map<String, String> colors = new HashMap<String, String>();
 
     static {
        try {
@@ -39,7 +40,7 @@ public class ColorResolver {
     }
 
     public static String resolveColor(String color) {
-        String resolvedColor = colors.get(color.toLowerCase());
+        String resolvedColor = colors.get(color);
         if (resolvedColor == null)
             return null;
         return resolvedColor;
