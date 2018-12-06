@@ -11,7 +11,7 @@ import java.util.TreeMap;
 public class ColorResolver {
 
     static void init() throws FileNotFoundException , IOException {
-        File excelSource = new File("C:\\Users\\tarasov.a\\Desktop\\parser\\excel.xls");
+        File excelSource = new File("C:\\Users\\tarasov.a\\Desktop\\parser\\patterns.xls");
         FileInputStream fileInputStream = new FileInputStream(excelSource);
         Workbook workbook = new HSSFWorkbook(fileInputStream);
         Sheet sheet = workbook.getSheetAt(0);

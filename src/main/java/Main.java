@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -40,6 +42,8 @@ public class Main {
         File directory = new File(path);
 
         File[] files = directory.listFiles();
+        Map<String, String> notResolvedColors = new HashMap<String, String>();
+
 
         for (File file : files) {
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -85,7 +89,8 @@ public class Main {
                     if ((color = ColorResolver.resolveColor(row.getCell(4).getStringCellValue())) == null) {
                         color = row.getCell(4).getStringCellValue();
                         doneRow.getCell(7).setCellValue(color);
-                        System.out.println("Color has not been resolved for " + row.getCell(6).getStringCellValue() + " file name: " + file.getName());
+
+                        notResolvedColors.put(row.getCell(6).getStringCellValue() + " " + file.getName(), row.getCell(4).getStringCellValue());
                     } else {
                         doneRow.getCell(7).setCellValue(color);
                     }
@@ -103,5 +108,12 @@ public class Main {
             fileOutputStream.close();
             fileInputStream.close();
         }
+
+        System.out.println("color not resolved:");
+        for (Map.Entry entry : notResolvedColors.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
     }
+
+
 }
