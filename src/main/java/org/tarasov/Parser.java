@@ -15,10 +15,14 @@ public class Parser {
     private String patternsPath;
     private String pathToSave;
     private String filesForProcessingPath;
+    private ColorResolver colorResolver;
+    private ExcelReader excelReader;
 
-    public Parser(String patternsPath, String pathToSave) {
-        this.patternsPath = patternsPath;
+    public Parser(String pathToSave, ColorResolver colorResolver, ExcelReader excelReader) {
         this.pathToSave = pathToSave;
+        this.colorResolver = colorResolver;
+        this.excelReader = excelReader;
+        this.patternsPath = colorResolver.getPatternsPath();
     }
 
     public Parser() {
@@ -106,7 +110,7 @@ public class Parser {
         for (File file : files) {
             FileInputStream fileInputStream = new FileInputStream(file);
             Workbook workbook = new HSSFWorkbook(fileInputStream);
-            Iterator<Row> rows = ExcelReader.getExcelList(workbook);
+            Iterator<Row> rows = excelReader.getExcelList(workbook);
             doneWorkbook = new HSSFWorkbook();
             Sheet doneSheet = doneWorkbook.createSheet();
             Row headerRow = doneSheet.createRow(0);
@@ -162,7 +166,7 @@ public class Parser {
 
                 if (row.getCell(4) != null) {
                     String color;
-                    if ((color = ColorResolver.resolveColor(row.getCell(4).getStringCellValue())) == null) {
+                    if ((color = colorResolver.resolveColor(row.getCell(4).getStringCellValue())) == null) {
                         color = row.getCell(4).getStringCellValue();
                         doneRow.getCell(7).setCellValue(color);
 

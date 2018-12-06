@@ -11,9 +11,26 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class ColorResolver {
+    private Map<String, String> colors = new HashMap<String, String>();
+    private String patternsPath;
 
-    static void init() throws FileNotFoundException , IOException {
-        File excelSource = new File("C:\\Users\\tarasov.a\\Desktop\\parser\\patterns.xls");
+    public ColorResolver() {
+    }
+
+    public ColorResolver(String patternsPath)
+    {
+        this.patternsPath = patternsPath;
+        try {
+            init();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void init() throws IOException {
+        File excelSource = new File(patternsPath);
         FileInputStream fileInputStream = new FileInputStream(excelSource);
         Workbook workbook = new HSSFWorkbook(fileInputStream);
         Sheet sheet = workbook.getSheetAt(0);
@@ -28,22 +45,18 @@ public class ColorResolver {
         fileInputStream.close();
     }
 
-    static Map<String, String> colors = new HashMap<String, String>();
-
-    static {
-       try {
-           init();
-       } catch (FileNotFoundException e) {
-           e.printStackTrace();
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-    }
-
-    public static String resolveColor(String color) {
+    public String resolveColor(String color) {
         String resolvedColor = colors.get(color);
         if (resolvedColor == null)
             return null;
         return resolvedColor;
+    }
+
+    public String getPatternsPath() {
+        return patternsPath;
+    }
+
+    public void setPatternsPath(String patternsPath) {
+        this.patternsPath = patternsPath;
     }
 }
