@@ -5,13 +5,11 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="parser" class="org.tarasov.Parser">
-        <constructor-arg type="String" value="C:\\Users\\tarasov.a\\Desktop\\files\\"/>
         <constructor-arg ref="colorResolver"/>
         <constructor-arg ref="excelReader"/>
     </bean>
 
     <bean id="colorResolver" class="org.tarasov.ColorResolver">
-        <constructor-arg type="String" value="C:\\Users\\tarasov.a\\Desktop\\parser\\patterns.xls"/>
     </bean>
 
     <bean id="excelReader" class="org.tarasov.ExcelReader">

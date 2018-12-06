@@ -2,3 +2,4 @@ org\tarasov\ColorResolver.class
 org\tarasov\ExcelReader.class
 org\tarasov\Parser.class
 org\tarasov\ApplicationStarter.class
+org\tarasov\PathResolver.class

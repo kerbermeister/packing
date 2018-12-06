@@ -17,19 +17,19 @@ public class ColorResolver {
     public ColorResolver() {
     }
 
-    public ColorResolver(String patternsPath)
-    {
-        this.patternsPath = patternsPath;
-        try {
-            init();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public ColorResolver(String patternsPath)
+//    {
+//        this.patternsPath = patternsPath;
+//        try {
+//            init();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-    private void init() throws IOException {
+    public void init() throws IOException {
         File excelSource = new File(patternsPath);
         FileInputStream fileInputStream = new FileInputStream(excelSource);
         Workbook workbook = new HSSFWorkbook(fileInputStream);

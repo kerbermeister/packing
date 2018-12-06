@@ -18,8 +18,7 @@ public class Parser {
     private ColorResolver colorResolver;
     private ExcelReader excelReader;
 
-    public Parser(String pathToSave, ColorResolver colorResolver, ExcelReader excelReader) {
-        this.pathToSave = pathToSave;
+    public Parser(ColorResolver colorResolver, ExcelReader excelReader) {
         this.colorResolver = colorResolver;
         this.excelReader = excelReader;
         this.patternsPath = colorResolver.getPatternsPath();
