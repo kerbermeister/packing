@@ -13,24 +13,10 @@
       <change beforePath="$PROJECT_DIR$/target/classes/org/tarasov/ApplicationStarter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/tarasov/ApplicationStarter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/tarasov/ColorResolver.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/tarasov/ColorResolver.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/tarasov/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/tarasov/Parser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/commons-codec-1.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/commons-collections4-4.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/curvesapi-1.04.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/poi-3.17.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/poi-ooxml-3.17.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/poi-ooxml-schemas-3.17.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/spring-aop-5.1.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/spring-beans-5.1.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/spring-context-5.1.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/spring-core-5.1.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/spring-expression-5.1.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/spring-jcl-5.1.3.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/stax-api-1.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/lib/xmlbeans-2.6.0.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/parser-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/parser-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/run.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/run.bat" beforeDir="false" afterPath="$PROJECT_DIR$/target/run.bat" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -53,13 +39,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="6375" />
+          <entry key="java" value="6776" />
           <entry key="xml" value="248" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="6375" />
+          <entry key="JAVA" value="6776" />
           <entry key="XML" value="248" />
         </counts>
       </usages-collector>
@@ -126,8 +112,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/tarasov/ApplicationStarter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="600">
+              <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -199,7 +185,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="260" />
     <option name="y" value="20" />
     <option name="width" value="1400" />
@@ -264,7 +250,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544103272424" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544104239050" />
     <property name="last_opened_file_path" value="$USER_HOME$/MyProjects/BOM_Parser" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -287,7 +273,7 @@
     <configuration name="ApplicationStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.tarasov.ApplicationStarter" />
       <module name="parser" />
-      <option name="PROGRAM_PARAMETERS" value="C:\\Users\\tarasov.a\\Desktop\\files\\ C:\\Users\\tarasov.a\\Desktop\\parser\\patterns.xls" />
+      <option name="PROGRAM_PARAMETERS" value="C:\\Users\\tarasov.a\\Desktop\\files\\ C:\Users\tarasov.a\Desktop\parser\ff\patterns.xls C:\\Users\\tarasov.a\\Desktop\\files\\sources" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.tarasov.*" />
@@ -330,7 +316,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2553305" />
@@ -342,7 +328,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32900432" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32900432" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -522,8 +508,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/tarasov/ApplicationStarter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="600">
+          <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
