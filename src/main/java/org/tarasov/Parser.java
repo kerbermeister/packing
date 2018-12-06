@@ -24,7 +24,6 @@ public class Parser {
     public Parser() {
     }
 
-
     private void createHeaderRow(Row row) {
         row.createCell(0).setCellValue("Model");
         row.createCell(1).setCellValue("Quantity");
@@ -75,6 +74,25 @@ public class Parser {
         System.out.println("$/ : Недостающие цвета добавлены в patterns.xls, переведите их, прежде чем снова запускать приложение");
     }
 
+    private boolean isCellEmpty(Cell cell) {
+        cell.setCellType(CellType.STRING);
+        if (cell == null) return true;
+        if (cell.getCellType() == cell.CELL_TYPE_BLANK) return true;
+        if (cell.getStringCellValue().trim().length() == 0) return true;
+        return false;
+    }
+
+    private boolean isRowEmpty(Row row) {
+        if (row == null) return true;
+        Iterator<Cell> iterator = row.iterator();
+        while (iterator.hasNext()) {
+            Cell cell = iterator.next();
+            if (!isCellEmpty(cell))
+                return false;
+        }
+        return true;
+    }
+
     public void process() throws IOException {
         long startTime = System.currentTimeMillis();
         System.out.println("$/ : Обработка...");
@@ -84,7 +102,6 @@ public class Parser {
 
         File[] files = directory.listFiles();
         Map<String, String> notResolvedColors = new HashMap<String, String>();
-
 
         for (File file : files) {
             FileInputStream fileInputStream = new FileInputStream(file);
@@ -101,6 +118,8 @@ public class Parser {
 
             while (rows.hasNext()) {
                 Row row = rows.next();
+                if (isRowEmpty(row))
+                    continue;
 
                 if (rowNum == 0){
                     rowNum++;
@@ -155,7 +174,6 @@ public class Parser {
                         doneRow.getCell(7).setCellValue(color);
                     }
                 }
-
 
                 insertValueFromCell(doneRow, row, 8, 7);
                 prevKey = key;

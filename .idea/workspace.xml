@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09e8c734-cb0d-4897-bcda-55d840b7e2c9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patterns.xls" beforeDir="false" afterPath="$PROJECT_DIR$/patterns.xls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CellDoesNotExistException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tarasov/CellDoesNotExistException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ColorResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tarasov/ColorResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ExcelReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tarasov/ExcelReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tarasov/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CellDoesNotExistException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ColorResolver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ExcelReader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/tarasov/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/tarasov/Parser.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -35,13 +25,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="5419" />
+          <entry key="java" value="5846" />
           <entry key="xml" value="91" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5419" />
+          <entry key="JAVA" value="5846" />
           <entry key="XML" value="91" />
         </counts>
       </usages-collector>
@@ -98,22 +88,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/tarasov/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="102" column="38" selection-start-line="102" selection-start-column="38" selection-end-line="102" selection-end-column="38" />
+            <state relative-caret-position="527">
+              <caret line="123" column="29" selection-start-line="123" selection-start-column="29" selection-end-line="123" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1374#1391#0" expanded="true" />
                 <element signature="e#2869#2885#0" expanded="true" />
-                <element signature="e#313#314#0" expanded="true" />
-                <element signature="e#348#349#0" expanded="true" />
-                <element signature="e#404#405#0" expanded="true" />
-                <element signature="e#452#453#0" expanded="true" />
-                <element signature="e#489#490#0" expanded="true" />
-                <element signature="e#522#523#0" expanded="true" />
-                <element signature="e#574#575#0" expanded="true" />
-                <element signature="e#618#619#0" expanded="true" />
-                <element signature="e#667#668#0" expanded="true" />
-                <element signature="e#712#713#0" expanded="true" />
+                <element signature="e#7518#7519#0" expanded="true" />
+                <element signature="e#7553#7554#0" expanded="true" />
+                <element signature="e#7609#7610#0" expanded="true" />
+                <element signature="e#7657#7658#0" expanded="true" />
+                <element signature="e#7694#7695#0" expanded="true" />
+                <element signature="e#7727#7728#0" expanded="true" />
+                <element signature="e#7779#7780#0" expanded="true" />
+                <element signature="e#7823#7824#0" expanded="true" />
+                <element signature="e#7872#7873#0" expanded="true" />
+                <element signature="e#7917#7918#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -253,8 +243,11 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544094010588" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544094911507" />
     <property name="last_opened_file_path" value="$USER_HOME$/MyProjects/BOM_Parser" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RunDashboard">
@@ -327,7 +320,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32900432" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32900432" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -478,25 +471,101 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/tarasov/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="102" column="38" selection-start-line="102" selection-start-column="38" selection-end-line="102" selection-end-column="38" />
+        <state relative-caret-position="527">
+          <caret line="123" column="29" selection-start-line="123" selection-start-column="29" selection-end-line="123" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1374#1391#0" expanded="true" />
             <element signature="e#2869#2885#0" expanded="true" />
-            <element signature="e#313#314#0" expanded="true" />
-            <element signature="e#348#349#0" expanded="true" />
-            <element signature="e#404#405#0" expanded="true" />
-            <element signature="e#452#453#0" expanded="true" />
-            <element signature="e#489#490#0" expanded="true" />
-            <element signature="e#522#523#0" expanded="true" />
-            <element signature="e#574#575#0" expanded="true" />
-            <element signature="e#618#619#0" expanded="true" />
-            <element signature="e#667#668#0" expanded="true" />
-            <element signature="e#712#713#0" expanded="true" />
+            <element signature="e#7518#7519#0" expanded="true" />
+            <element signature="e#7553#7554#0" expanded="true" />
+            <element signature="e#7609#7610#0" expanded="true" />
+            <element signature="e#7657#7658#0" expanded="true" />
+            <element signature="e#7694#7695#0" expanded="true" />
+            <element signature="e#7727#7728#0" expanded="true" />
+            <element signature="e#7779#7780#0" expanded="true" />
+            <element signature="e#7823#7824#0" expanded="true" />
+            <element signature="e#7872#7873#0" expanded="true" />
+            <element signature="e#7917#7918#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>parser</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: com.github.virtuald:curvesapi:1.04</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
