@@ -45,21 +45,35 @@ public class Main {
             Iterator<Row> rows = ExcelReader.getExcelList(workbook);
             doneWorkbook = new HSSFWorkbook();
             Sheet doneSheet = doneWorkbook.createSheet();
-
-            int rowNum = 0;
             Row headerRow = doneSheet.createRow(0);
             createHeaderRow(headerRow);
 
+            int rowNum = 0;
+            int doneRowNum = 0;
+            String key, prevKey = null;
+
             while (rows.hasNext()) {
+                Row row = rows.next();
                 if (rowNum == 0){
-                    rows.next();
                     rowNum++;
+                    doneRowNum++;
                     continue;
+                } else if (rowNum == 1) {
+                    key = row.getCell(6).getStringCellValue() + " " + row.getCell(4).getStringCellValue();
+                    prevKey = key;
+                    doneWorkbook.setSheetName(0, key.replaceAll("[^A-Za-zА-Яа-я-^0-9-\\s]", "") + "(" + doneWorkbook.getNumberOfSheets() + ")");
                 }
 
-                Row row = rows.next();
+                key = row.getCell(6).getStringCellValue() + " " + row.getCell(4).getStringCellValue();
+                if (!key.equals(prevKey)) {
+                    doneSheet = doneWorkbook.createSheet(key.replaceAll("[^A-Za-zА-Яа-я-^0-9-\\s-]", "") + "(" + doneWorkbook.getNumberOfSheets() + ")");
+                    headerRow = doneSheet.createRow(0);
+                    createHeaderRow(headerRow);
+                    doneRowNum = 1;
+                }
+
                 Iterator<Cell> cellIterator = row.cellIterator();
-                Row doneRow = doneSheet.createRow(rowNum);
+                Row doneRow = doneSheet.createRow(doneRowNum);
 
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
@@ -95,8 +109,9 @@ public class Main {
 
 
                 insertValueFromCell(doneRow, row, 8, 7);
-
+                prevKey = key;
                 rowNum++;
+                doneRowNum++;
             }
 
             File outputFile = new File("C:\\Users\\tarasov.a\\Desktop\\files\\" + file.getName().substring(0, file.getName().indexOf(".")) + ".xls");
@@ -105,6 +120,8 @@ public class Main {
             fileOutputStream.close();
             fileInputStream.close();
         }
+
+
 
         System.out.println("цвета неопределены:");
         for (String key : notResolvedColors.keySet()) {
@@ -146,6 +163,4 @@ public class Main {
         fileOutputStream.close();
         System.out.println("недостающие цвета добавлены в patterns.xls, переведите их");
     }
-
-
 }
