@@ -29,7 +29,8 @@ public class Main {
     public static void main(String[] args) throws InvalidFormatException, IOException {
         String path;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("введите путь с файлами для обработки: ");
+        System.out.println("$/ : Введите путь с файлами для обработки: ");
+        long startTime = System.currentTimeMillis();
         path = scanner.nextLine();
         Workbook doneWorkbook;
 
@@ -121,17 +122,17 @@ public class Main {
             fileInputStream.close();
         }
 
-
-
-        System.out.println("цвета неопределены:");
-        for (String key : notResolvedColors.keySet()) {
-            System.out.println(key);
-        }
-
         if (!notResolvedColors.isEmpty()) {
+            System.out.println("$/ : Цвета неопределены:");
+            for (String key : notResolvedColors.keySet()) {
+                System.out.println(key);
+            }
             addNotResolvedColors(notResolvedColors);
-        }
 
+        } else {
+            System.out.println("$/ : Все цвета определены, процесс успешно завершен");
+        }
+        System.out.println("$/ : Процесс занял " + (System.currentTimeMillis() - startTime) + " мс");
     }
 
     public static void addNotResolvedColors(Map<String, String> notResolvedColors) throws IOException{
@@ -161,6 +162,6 @@ public class Main {
         ((HSSFWorkbook) patternWorkbook).write(fileOutputStream);
         patternWorkbook.close();
         fileOutputStream.close();
-        System.out.println("недостающие цвета добавлены в patterns.xls, переведите их");
+        System.out.println("$/ : Недостающие цвета добавлены в patterns.xls, переведите их, прежде чем снова запускать приложение");
     }
 }
