@@ -41,9 +41,9 @@ public class Parser {
 
     private void insertValueFromCell(Row doneRow, Row row, int to, int from) {
         if (row.getCell(from) == null) {
-            doneRow.createCell(to).setCellType(CellType.STRING);
+            doneRow.getCell(to).setCellType(CellType.STRING);
         } else {
-            doneRow.createCell(to).setCellValue(row.getCell(from).getStringCellValue());
+            doneRow.getCell(to).setCellValue(row.getCell(from).getStringCellValue());
         }
     }
 
@@ -114,6 +114,8 @@ public class Parser {
             Sheet doneSheet = doneWorkbook.createSheet();
             Row headerRow = doneSheet.createRow(0);
             createHeaderRow(headerRow);
+            CellStyle cellStyle = doneWorkbook.createCellStyle();
+            cellStyle.setDataFormat((short) 14);
 
             int rowNum = 0;
             int doneRowNum = 0;
@@ -146,19 +148,33 @@ public class Parser {
                 Iterator<Cell> cellIterator = row.cellIterator();
                 Row doneRow = doneSheet.createRow(doneRowNum);
 
+                int counter = 0;
                 while (cellIterator.hasNext()) {
+                    if (counter == 1) {
+                        counter++;
+                        cellIterator.next();
+                        continue;
+                    }
                     Cell cell = cellIterator.next();
                     cell.setCellType(CellType.STRING);
+                    counter++;
                 }
 
                 for (int i = 0; i < 9; i++) {
+                    if (i == 3) {
+                        doneRow.createCell(i).setCellType(CellType.NUMERIC);
+                        continue;
+                    }
                     doneRow.createCell(i).setCellType(CellType.STRING);
                 }
 
                 insertValueFromCell(doneRow, row, 0, 6);
                 insertValueFromCell(doneRow, row, 1, 0);
                 insertValueFromCell(doneRow, row, 2, 5);
-                insertValueFromCell(doneRow, row, 3, 1);
+
+                doneRow.getCell(3).setCellValue(row.getCell(1).getDateCellValue());
+                doneRow.getCell(3).setCellStyle(cellStyle);
+
                 insertValueFromCell(doneRow, row, 4, 2);
                 insertValueFromCell(doneRow, row, 5, 3);
                 insertValueFromCell(doneRow, row, 6, 10);

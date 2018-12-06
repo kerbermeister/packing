@@ -12,10 +12,12 @@ public class ApplicationStarter {
             Scanner scanner = new Scanner(System.in);
             String pathToSave = args[0];
             String patternsPath = args[1];
+            String pathFrom = args[2];
             System.out.println("Путь для сохранения обработанных файлов: " + pathToSave);
             System.out.println("Путь шаблонов: " + patternsPath);
+            System.out.println("Путь, откуда ведется обработка файлов по умолчанию: " + pathFrom);
             System.out.println();
-            String pathFrom = args[2];
+
             String answer;
             System.out.println("По умолчанию?");
             answer = scanner.nextLine();
