@@ -1,5 +1,7 @@
+org\tarasov\Parser.class
+org\tarasov\WorkbookSorter.class
 org\tarasov\ColorResolver.class
 org\tarasov\ExcelReader.class
-org\tarasov\Parser.class
+org\tarasov\WorkbookSorter$1.class
 org\tarasov\ApplicationStarter.class
 org\tarasov\PathResolver.class

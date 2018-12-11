@@ -7,9 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class Parser {
     private String patternsPath;
@@ -102,13 +100,23 @@ public class Parser {
         Workbook doneWorkbook;
 
         File directory = new File(filesForProcessingPath);
+        File[] files;
 
-        File[] files = directory.listFiles();
+        if (directory.listFiles() != null) {
+             files = directory.listFiles();
+        } else {
+            System.out.println("$/ : Ошибка! Директория с исходными файлами для обработки пуста!");
+            return;
+        }
+
         Map<String, String> notResolvedColors = new HashMap<String, String>();
 
         for (File file : files) {
+            System.out.println("$/ : Обрабатывается файл " + file.getName());
             FileInputStream fileInputStream = new FileInputStream(file);
             Workbook workbook = new HSSFWorkbook(fileInputStream);
+            workbook = WorkbookSorter.sortWorkbook(workbook);
+
             Iterator<Row> rows = excelReader.getExcelList(workbook);
             doneWorkbook = new HSSFWorkbook();
             Sheet doneSheet = doneWorkbook.createSheet();
