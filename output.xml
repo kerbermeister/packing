@@ -1,0 +1,265 @@
+﻿2. ��������� ������� Stream
+
+���� ��� ������ ������. ������ ����� ����������, ��� ������� ��� �������� ������ java.util.stream.Stream.
+  - ������ �����: Stream.empty() // Stream<String>
+  - ����� �� List: list.stream() // Stream<String>
+  - ����� �� Map: map.entrySet().stream() // Stream<Map.Entry<String, String>>
+  - ����� �� �������: Arrays.stream(array) // Stream<String>
+  - ����� �� ��������� ���������: Stream.of("a", "b", "c") // Stream<String>
+
+� ��� � ������:
+[����������] [�������]
+public static void main(String[] args) {
+    List<String> list = Arrays.stream(args)
+        .filter(s -> s.length() <= 2)
+        .collect(Collectors.toList());
+}
+
+� ������ ������� ���������� ������ ����� Arrays.stream, ������� �� ������� args ������ �����. ������������� �������� filter �������� ������ �� ������, ����� ������� �� ��������� ���. ������������ �������� collect �������� ���������� �������� � ����� ������.
+
+� ��� ���� ������:
+[����������] [�������]
+IntStream.of(120, 410, 85, 32, 314, 12)
+    .filter(x -> x < 300)
+    .map(x -> x + 11)
+    .limit(3)
+    .forEach(System.out::print)
+
+����� ��� ��� ������������� ���������:
+  - filter � �������� ��������, �������� ������� ������ 300,
+  - map � ���������� 11 � ������� �����,
+  - limit � ������������ ���������� ��������� �� 3.
+
+������������ �������� forEach ��������� ������� print � ������� ����������� ��������.
+
+�� ������ ������� Java ���� ������ �������� �� ���:
+[����������] [�������]
+int[] arr = {120, 410, 85, 32, 314, 12};
+int count = 0;
+for (int x : arr) {
+    if (x >= 300) continue;
+    x += 11;
+    count++;
+    if (count > 3) break;
+    System.out.print(x);
+}
+� ����������� ����� ���������� ��� � ������ ������� ���������� �� �� �������, �� ������ ��� � ���, ��� ������� ���������� �� ��������� ������� ��� ����� ������� ���� �� ������ ��������.
+
+
+3. ��� �������� �����
+
+� ������� ���� ��������� �����������. ��-������, ��������� �� ������� �� ��� ���, ���� �� ����� ������ ������������ ��������. list.stream().filter(x -> x > 100); �� ������ �� ������� �������� �� ������. ��-������, ����� ����� ��������� ������ ����������������.
+[����������] [�������]
+Stream<String> stream = list.stream();
+stream.forEach(System.out::println);
+stream.filter(s -> s.contains("Stream API"));
+stream.forEach(System.out::println);
+��� �� ������ ������ ����������, � ��� �� ������� �������� ���������� java.lang.IllegalStateException: stream has already been operated upon or closed.
+
+������ �� ������ �����������, ������ �����, ��� ��������� ���������� �� ������������� ��������� � ���������. ��� ������������� ��� � ��� ������. �� ����� � �������� ��������� ������������ ������������ ����������� ������������������, ������, ���������� ��� ����� ���������, �� ������������ ���� ��������� � �����.
+
+
+���� �� �� ������������ ������������ ��������, ������� � ��������� �� �����������. ��� ������ �������� ������������ �������� forEach, �� ���� ����������� �������� � �������� ����� ��� ��������� limit. ��� � ���� ������� ���������� � map, map � filter, � filter ��� ���������� � ���������. ����� �������� ��������� � ������ �������: ��������, filter, map, limit � forEach.
+���� �����-���� �� ���������� �� ���������� ������� ������� �������, ����� ��������� �� �����.
+��� ������ ����� �������� limit ������ 3 ��������, �� ��������� � �������� ��������� � ������ �� ����� ����������� �������� � map. forEach ����������� ��������� �������, �� limit ��������, ��� ������ �� ����� ��������� ���������, ������� forEach ������ �����, ��� �������� ����������� � ���������� ������.
+
+����� ������ ������ pull iteration, �� ���� �������� ������������� � ��������� �� ���� ����������. � �����, � RxJava ���������� push iteration ������, �� ���� �������� ��� ����������, ��� ��������� �������� � �� ����� ����������.
+
+
+4. ������������ ������
+
+������ ������ ����������������� (sequential) � ������������� (parallel). ���������������� ����������� ������ � ������� ������, � ��� ������������ ���������� ����� ��� ForkJoinPool.commonPool(). ��� ���� �������� ����������� (���� ��� ��������) �� ��������� ����� � �������������� � ������ ������ ��������. ����� �� ������ ����� ������ ������������ � ���� ��� �������������� ��������� ����������.
+
+����� �������� ������������ �����, ����� ���� ������� ����� parallelStream() ������ stream(), ���� ���������� ������� ����� � ������������, ������ ������������� �������� parallel.
+[����������] [�������]
+list.parallelStream()
+    .filter(x -> x > 10)
+    .map(x -> x * 2)
+    .collect(Collectors.toList());
+ 
+IntStream.range(0, 10)
+    .parallel()
+    .map(x -> x * 10)
+    .sum();
+
+������ � ������������������� �����������, ��������� ��������� �� �����, �������� �������, ����������� ������ �������, �� ��� ������� � ���������� Stream API. �� ��� ���� ��������� ������� ������ ����� � ����������, ����� ������� � ���������� �� �������� �� �����-���� ������� ��������, ����� ���� ���� �������� �������� ��������� ��� ������.
+
+��� ��� ������ ������:
+[����������] [�������]
+final List<Integer> ints = new ArrayList<>();
+IntStream.range(0, 1000000)
+    .parallel()
+    .forEach(i -> ints.add(i));
+System.out.println(ints.size());
+��� ��� ���������. �� ����� ��������� ����������� � �������� 1000000, ����� ����������� � �������� 869877, � ����� � ������ � ������� Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 332 at java.util.ArrayList.add(ArrayList.java:459).
+2. Poluchenie ob'ekta Stream
+
+Poka chto hvatit teorii. Prishlo vremya posmotret', kak sozdat' ili poluchit' ob'ekt java.util.stream.Stream.
+  - Pustoi strim: Stream.empty() // Stream<String>
+  - Strim iz List: list.stream() // Stream<String>
+  - Strim iz Map: map.entrySet().stream() // Stream<Map.Entry<String, String>>
+  - Strim iz massiva: Arrays.stream(array) // Stream<String>
+  - Strim iz ukazannyh elementov: Stream.of("a", "b", "c") // Stream<String>
+
+A vot i primer:
+[kopirovat'] [skachat']
+public static void main(String[] args) {
+    List<String> list = Arrays.stream(args)
+        .filter(s -> s.length() <= 2)
+        .collect(Collectors.toList());
+}
+
+V dannom primere istochnikom slujit metod Arrays.stream, kotoryi iz massiva args delaet strim. Promejutochnyi operator filter otbiraet tol'ko te stroki, dlina kotoryh ne prevyshaet dva. Terminal'nyi operator collect sobiraet poluchennye elementy v novyi spisok.
+
+I esche odin primer:
+[kopirovat'] [skachat']
+IntStream.of(120, 410, 85, 32, 314, 12)
+    .filter(x -> x < 300)
+    .map(x -> x + 11)
+    .limit(3)
+    .forEach(System.out::print)
+
+Zdes' uje tri promejutochnyh operatora:
+  - filter — otbiraet elementy, znachenie kotoryh men'she 300,
+  - map — pribavlyaet 11 k kajdomu chislu,
+  - limit — ogranichivaet kolichestvo elementov do 3.
+
+Terminal'nyi operator forEach primenyaet funkciyu print k kajdomu prihodyaschemu elementu.
+
+Na rannih versiyah Java etot primer vyglyadel by tak:
+[kopirovat'] [skachat']
+int[] arr = {120, 410, 85, 32, 314, 12};
+int count = 0;
+for (int x : arr) {
+    if (x >= 300) continue;
+    x += 11;
+    count++;
+    if (count > 3) break;
+    System.out.print(x);
+}
+S uvelicheniem chisla operatorov kod v rannih versiyah uslojnyalsya by na poryadok, ne govorya uje o tom, chto razbit' vychisleniya na neskol'ko potokov pri takom podhode bylo by kraine neprosto.
+
+
+3. Kak rabotaet strim
+
+U strimov est' nekotorye osobennosti. Vo-pervyh, obrabotka ne nachnetsya do teh por, poka ne budet vyzvan terminal'nyi operator. list.stream().filter(x -> x > 100); ne voz'met ni edinogo elementa iz spiska. Vo-vtoryh, strim posle obrabotki nel'zya pereispol'zovat'.
+[kopirovat'] [skachat']
+Stream<String> stream = list.stream();
+stream.forEach(System.out::println);
+stream.filter(s -> s.contains("Stream API"));
+stream.forEach(System.out::println);
+Kod na vtoroi stroke vypolnitsya, a vot na tret'ei vybrosit isklyuchenie java.lang.IllegalStateException: stream has already been operated upon or closed.
+
+Ishodya iz pervoi osobennosti, delaem vyvod, chto obrabotka proishodit ot terminal'nogo operatora k istochniku. Eto deistvitel'no tak i eto udobno. My mojem v kachestve istochnika ispol'zovat' generiruemuyu beskonechnuyu posledovatel'nost', skajem, faktoriala ili chisel Fibonachchi, no obrabatyvat' lish' nekotoruyu ee chast'.
+
+
+Poka my ne prisoedinili terminal'nyi operator, dostupa k istochniku ne provodilos'. Kak tol'ko poyavilsya terminal'nyi operator forEach, on stal zaprashivat' elementy u stoyaschego pered nim operatora limit. Tot v svoyu ochered' obraschaetsya k map, map k filter, a filter uje obraschaetsya k istochniku. Zatem elementy postupayut v pryamom poryadke: istochnik, filter, map, limit i forEach.
+Poka kakoi-libo iz operatorov ne obrabotaet element doljnym obrazom, novye zaprosheny ne budut.
+Kak tol'ko cherez operator limit proshlo 3 elementa, on perehodit v zakrytoe sostoyanie i bol'she ne budet zaprashivat' elementy u map. forEach zaprashivaet ocherednoi element, no limit soobschaet, chto bol'she ne mojet postavit' elementov, poetomu forEach delaet vyvod, chto elementy zakonchilis' i prekraschaet rabotu.
+
+Takoi podhod zovetsya pull iteration, to est' elementy zaprashivayutsya u istochnika po mere nadobnosti. K slovu, v RxJava realizovan push iteration podhod, to est' istochnik sam uvedomlyaet, chto poyavilis' elementy i ih nujno obrabotat'.
+
+
+4. Parallel'nye strimy
+
+Strimy byvayut posledovatel'nymi (sequential) i parallel'nymi (parallel). Posledovatel'nye vypolnyayutsya tol'ko v tekuschem potoke, a vot parallel'nye ispol'zuyut obschii pul ForkJoinPool.commonPool(). Pri etom elementy razbivayutsya (esli eto vozmojno) na neskol'ko grupp i obrabatyvayutsya v kajdom potoke otdel'no. Zatem na nujnom etape gruppy ob'edinyayutsya v odnu dlya predostavleniya konechnogo rezul'tata.
+
+Chtoby poluchit' parallel'nyi strim, nujno libo vyzvat' metod parallelStream() vmesto stream(), libo prevratit' obychnyi strim v parallel'nyi, vyzvav promejutochnyi operator parallel.
+[kopirovat'] [skachat']
+list.parallelStream()
+    .filter(x -> x > 10)
+    .map(x -> x * 2)
+    .collect(Collectors.toList());
+ 
+IntStream.range(0, 10)
+    .parallel()
+    .map(x -> x * 10)
+    .sum();
+
+Rabota s potokonebezopasnymi kollekciyami, razbienie elementov na chasti, sozdanie potokov, ob'edinenie chastei voedino, vse eto kroetsya v realizacii Stream API. Ot nas lish' trebuetsya vyzvat' nujnyi metod i prosledit', chtoby funkcii v operatorah ne zaviseli ot kakih-libo vneshnih faktorov, inache est' risk poluchit' nevernyi rezul'tat ili oshibku.
+
+Vot tak delat' nel'zya:
+[kopirovat'] [skachat']
+final List<Integer> ints = new ArrayList<>();
+IntStream.range(0, 1000000)
+    .parallel()
+    .forEach(i -> ints.add(i));
+System.out.println(ints.size());
+Eto kod Shredingera. On mojet normal'no vypolnit'sya i pokazat' 1000000, mojet vypolnit'sya i pokazat' 869877, a mojet i upast' s oshibkoi Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 332 at java.util.ArrayList.add(ArrayList.java:459).
+
+Poetomu razrabotchiki nastoyatel'no prosyat vozderjat'sya ot pobochnyh effektov v lyambdah, to tut, to tam govorya v dokumentacii o nevmeshatel'stve (non-interference).
+
+
+5. Strimy dlya primitivov
+
+Krome ob'ektnyh strimov Stream<T>, suschestvuyut special'nye strimy dlya primitivnyh tipov:
+  - IntStream dlya int,
+  - LongStream dlya long,
+  - DoubleStream dlya double.
+
+Dlya boolean, byte, short i char special'nyh strimov ne pridumali, no vmesto nih mojno ispol'zovat' IntStream, a zatem privodit' k nujnomu tipu. Dlya float toje pridetsya vospol'zovat'sya DoubleStream.
+
+Primitivnye strimy polezny, tak kak ne nujno tratit' vremya na boksing/anboksing, k tomu je u nih est' ryad special'nyh operatorov, uproschayuschih jizn'. Ih my rassmotrim ochen' skoro.
+
+
+6. Operatory Stream API
+
+Dal'she privodyatsya operatory Stream API s opisaniem, demonstraciei i primerami. Mojete ispol'zovat' eto kak spravochnik.
+
+6.1. Istochniki
+
+empty()
+Strim, kak i kollekciya, mojet byt' pustym, a znachit vsem posleduyuschem operatoram nechego budet obrabatyvat'.
+Stream.empty()
+    .forEach(System.out::println);
+// Vyvoda net
+
+
+of(T value)
+of(T... values)
+Strim dlya odnogo ili neskol'kih perechislennyh elementov. Ochen' chasto viju, chto ispol'zuyut takuyu konstrukciyu:
+Arrays.asList(1, 2, 3).stream()
+    .forEach(System.out::println);
+odnako ona izlishnya. Vot tak prosche:
+Stream.of(1, 2, 3)
+    .forEach(System.out::println);
+
+
+ofNullable(T t)
+Poyavilsya v Java 9. Vozvraschaet pustoi strim, esli v kachestve argumenta peredan null, v protivnom sluchae, vozvraschaet strim iz odnogo elementa.
+[kopirovat'] [skachat']
+String str = Math.random() > 0.5 ? "I'm feeling lucky" : null;
+Stream.ofNullable(str)
+    .forEach(System.out::println);
+
+
+generate(Supplier s)
+Vozvraschaet strim s beskonechnoi posledovatel'nost'yu elementov, generiruemyh funkciei Supplier s.
+Stream.generate(() -> 6)
+    .limit(6)
+    .forEach(System.out::println);
+// 6, 6, 6, 6, 6, 6
+
+Poskol'ku strim beskonechnyi, nujno ego ogranichivat' ili ostorojno ispol'zovat', daby ne popast' v beskonechnyi cikl.
+
+
+iterate​(T seed, UnaryOperator f)
+Vozvraschaet beskonechnyi strim s elementami, kotorye obrazuyutsya v rezul'tate posledovatel'nogo primeneniya funkcii f k iteriruemomu znacheniyu. Pervym elementom budet seed, zatem f(seed), zatem f(f(seed)) i tak dalee.
+[kopirovat'] [skachat']
+Stream.iterate(2, x -> x + 6)
+    .limit(6)
+    .forEach(System.out::println);
+// 2, 8, 14, 20, 26, 32
+
+[kopirovat'] [skachat']
+Stream.iterate(1, x -> x * 2)
+    .limit(6)
+    .forEach(System.out::println);
+// 1, 2, 
+, 
+, 
+, 32
+
+
+iterate​(T seed, Predicate hasNext, UnaryOperator f)
+Poyavilsya v Java 9. Vse to je samoe, tol'ko dobavlyaetsya esche odin argument hasNext: esli on vozvraschaet false, to strim zavershaetsya. Eto ochen' pohoje na cikl for:

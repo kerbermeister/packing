@@ -226,6 +226,9 @@ public class Parser {
             System.out.println("$/ : Все цвета определены, процесс успешно завершен");
         }
         System.out.println("$/ : Процесс занял " + (System.currentTimeMillis() - startTime) + " мс");
+
+        Merger merger = new Merger();
+        merger.process(pathToSave, pathToSave);
     }
 
 
